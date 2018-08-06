@@ -1,0 +1,39 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class DecodeStringDP {
+
+	static int count(String str, int len) {
+		int prime = 1000000007;
+		long[] dp = new long[len + 1];
+		dp[0] = 0;
+		dp[1] = 1;
+		for (int i = 2; i<= len; i++) {
+			dp[i] = dp[i-1];
+			
+			int twoNum = Integer.parseInt(str.substring(i-2, i));
+			if (twoNum <= 25) {
+				dp[i] = (dp[i] + dp[i-2])%prime;
+			}
+		}
+		return (int)dp[len];
+	}
+	
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCaseCount = Integer.parseInt(br.readLine());
+
+		while (testCaseCount > 0) {
+			int strLen = Integer.parseInt(br.readLine());
+			String str = br.readLine();
+			output.write(count(str, strLen) + "\n");
+			testCaseCount--;
+		}
+		output.flush();
+	}
+}

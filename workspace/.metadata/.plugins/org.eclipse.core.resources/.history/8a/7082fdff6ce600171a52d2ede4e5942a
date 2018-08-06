@@ -1,0 +1,70 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class RabinKarp {
+	
+	static int largePrime = 1000000007;
+	static int shortPrime = 17;
+	static int[] primes;
+
+	static long findOccurancesCount(String pattern, String text) {
+		int count = 0;
+		int patternHash = findHash(pattern);
+		int length = pattern.length();
+		int prevWindowHash = findHash(text.substring(0,length));
+		if(prevWindowHash == patternHash) {
+			count++;
+		}
+		for(int i=1; i<= text.length()-length; i++) {
+			int currWindowHash = ((prevWindowHash - 
+					(text.charAt(i-1)*primes[length-1]) + (122*largePrime))*shortPrime
+					+ (text.charAt(i+length-1)*shortPrime)
+					)%largePrime;
+			if(currWindowHash == patternHash) {
+				count++;
+			}
+			prevWindowHash = currWindowHash;
+		}
+		return count;
+	}
+	
+	static int findHash(String str) {
+		int hash = 0;
+		int length = str.length();
+		for (int i = 0; i < str.length(); i++) {
+			int currentHash = (str.charAt(i) * primes[length - (i+1)])%largePrime;
+			hash = hash + currentHash;
+		}
+		return hash;
+	}
+	
+	static void preComputePrimes(int length) {
+		primes = new int[length];
+		primes[0] = shortPrime;
+		for (int i = 1; i < length; i++) {
+			primes[i] = (primes[i-1]*shortPrime)%largePrime;
+		}
+	}
+	
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCount = Integer.parseInt(br.readLine());
+		while(testCount > 0) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			String pattern = st.nextToken();
+			preComputePrimes(pattern.length());
+			String text = st.nextToken();
+			long count = findOccurancesCount(pattern, text);
+			System.out.println(count);
+			testCount--;
+		}
+		bw.flush();
+	}
+
+}

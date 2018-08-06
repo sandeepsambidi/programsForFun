@@ -1,0 +1,38 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class RabinKarp {
+	
+	int largePrime = 1e9;
+
+	static long findOccurancesCount(String pattern, String text) {
+		int ans = 0;
+		
+		return ans;
+	}
+	
+	int findHash(String str) {
+		int hash = 0;
+		
+	}
+	
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCount = Integer.parseInt(br.readLine());
+		while(testCount > 0) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			String pattern = st.nextToken();
+			String text = st.nextToken();
+			findOccurancesCount(pattern, text);
+			testCount--;
+		}
+		bw.flush();
+	}
+
+}

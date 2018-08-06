@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Dustbin {
+
+	List<String> bin = new ArrayList<>();
+	
+	boolean isFull() {
+		if (bin.size() >= 11) {
+			return true;
+		}
+		return false;
+	}
+	
+	boolean put(String str) {
+		if (isFull() != true) {
+			bin.add(str);
+			return true;
+		}
+		return false;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

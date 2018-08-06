@@ -1,0 +1,45 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class GameOfSquares {
+	
+	static boolean[] result;
+	static void preCompute(int num) {
+		result = new boolean[num+1];
+		for(int i = 1; i<result.length; i++) {
+			int ps = 1;
+			int temp = num;
+			while(ps<=num) {
+				if(ps==num) {
+					result[num] = true;
+					break;
+				}
+				if(!result[num-ps]) {
+					result[num] = true;
+					break;
+				}
+				ps++;
+				ps = ps*ps;
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCaseCount = Integer.parseInt(br.readLine());
+		while (testCaseCount > 0) {
+			int num = Integer.parseInt(br.readLine());
+			int result = count(num);
+			output.write(result + "\n");
+			testCaseCount--;
+		}
+		output.flush();
+	}
+
+}

@@ -1,0 +1,51 @@
+package com.sandy.interviewBit.arrays;
+
+import java.util.Arrays;
+
+public class Flips {
+
+	int[] flip(String A) {
+		char[] aChar = A.toCharArray();
+		
+		int[] aInt = new int[aChar.length];
+		
+		for(int i = 0; i < aInt.length; i++) {
+			if(aChar[i] == '0') {
+				aInt[i] = 1;
+			} else {
+				aInt[i] = -1;
+			}
+		}
+		
+		int start = 0;
+		int end = 0;
+		int max = Integer.MIN_VALUE;
+		int curr = 0;
+		int s = 0;
+		
+		for(int i=0; i<aInt.length; i++) {
+			curr = curr + aInt[i];
+			if(curr < 0) {
+				s = i+1;
+				curr = 0;
+			} 
+			if(curr > max) {
+				end = i;
+				start = s;
+				max = curr;
+			}
+		}
+		
+		
+		if(max <=0) {
+			return new int[0];
+		}
+		
+		return new int[]{start+1, end+1};
+	}
+	public static void main(String[] args) {
+		Flips flips = new Flips();
+		System.out.println(Arrays.toString(flips.flip("111")));
+	}
+
+}

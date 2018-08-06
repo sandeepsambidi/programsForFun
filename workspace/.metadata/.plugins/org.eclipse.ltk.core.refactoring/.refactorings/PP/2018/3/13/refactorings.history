@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;buildingsCount&apos; in &apos;SumCalculation.main(...)&apos; to &apos;arrCount&apos;&#x0A;- Original project: &apos;PP&apos;&#x0A;- Original element: &apos;SumCalculation.main(String[]).buildingsCount&apos;&#x0A;- Renamed element: &apos;buildingsCount&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;buildingsCount&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{SumCalculation.java[SumCalculation~main~\[QString;@buildingsCount!770!822!774!787!I!0!false" name="arrCount" references="true" stamp="1522380012343" version="1.0"/>
+</session>

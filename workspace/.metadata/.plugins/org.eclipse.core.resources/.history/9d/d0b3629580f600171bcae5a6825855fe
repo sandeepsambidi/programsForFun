@@ -1,0 +1,41 @@
+package trees;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class IsBST {
+	
+	boolean checkBST(int[] arr, int leftMax, int rightMax) {
+		return false;
+	}
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int tc = Integer.parseInt(br.readLine());
+		while(tc>0) {
+			int nodeCount = Integer.parseInt(br.readLine());
+			int index = 0;
+			int[] arr = new int[nodeCount];
+
+			StringTokenizer st = new StringTokenizer(br.readLine());
+
+			while(index < nodeCount) {
+				arr[index] = Integer.parseInt(st.nextToken());
+				index++;
+			}
+			
+			//System.out.println("pre = "+Arrays.toString(pre));
+			
+			IsBST obj = new IsBST();
+			String result =obj.checkBST(arr, Integer.MIN_VALUE, Integer.MAX_VALUE) ? "True" : "False";
+			bw.write(result + "\n");
+			tc--;
+		}
+		bw.flush();
+	}
+
+}

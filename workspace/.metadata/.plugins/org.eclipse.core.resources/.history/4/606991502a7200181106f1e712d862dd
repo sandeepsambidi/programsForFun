@@ -1,0 +1,24 @@
+package si;
+
+public class FindNcR {
+
+	static long calculateCombinations(int n, int r) {
+		long[][] storage = new long[n+1][r+1];
+		int prime = 1000000007;
+		for (int i = 0; i<= n; i++) {
+			for (int j = 0; j<= Math.min(i, r); j++) {
+				if(j==0 || j==i) {
+					storage[i][j] = 1;
+				} else {
+					storage[i][j] = ((storage[i-1][j] + storage[i-1][j-1])%prime;
+				}
+			}
+		}
+		return storage[n][r];
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(calculateCombinations(8, 3));
+	}
+
+}

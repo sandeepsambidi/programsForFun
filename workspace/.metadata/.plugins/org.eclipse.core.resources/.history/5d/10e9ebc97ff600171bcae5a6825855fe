@@ -1,0 +1,38 @@
+package trees;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class isBST {
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int tc = Integer.parseInt(br.readLine());
+		while(tc>0) {
+			int nodeCount = Integer.parseInt(br.readLine());
+			int index = 0;
+			int[] arr = new int[nodeCount];
+
+			StringTokenizer st = new StringTokenizer(br.readLine());
+
+			while(index < nodeCount) {
+				arr[index] = Integer.parseInt(st.nextToken());
+				index++;
+			}
+			
+			//System.out.println("pre = "+Arrays.toString(pre));
+			//System.out.println("in = "+Arrays.toString(in));
+
+			
+			InPreToPost inPreToPost = new InPreToPost();
+			System.out.println();
+			tc--;
+		}
+		bw.flush();
+	}
+
+}

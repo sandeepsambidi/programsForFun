@@ -1,0 +1,38 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class KanpsackDP {
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCaseCount = Integer.parseInt(br.readLine());
+		while (testCaseCount > 0) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int bagSize = Integer.parseInt(st.nextToken());
+			int itemCount = Integer.parseInt(st.nextToken());
+
+			int size[] = new int[itemCount];
+			int value[] = new int[itemCount];
+			int i = 0;
+			while (i < itemCount) {
+				st = new StringTokenizer(br.readLine());
+				size[i] = Integer.parseInt(st.nextToken());
+				value[i] = Integer.parseInt(st.nextToken());
+
+				i++;
+			}
+			
+			countPaths(arr);
+			testCaseCount--;
+		}
+		output.flush();
+
+	}
+
+}

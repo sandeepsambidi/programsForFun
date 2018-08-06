@@ -1,0 +1,73 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class RabinKarp {
+	
+	static long lp = 1000000007;
+	static long sp = 17;
+	static long sp1 = 37; 
+	static long[] primes;
+
+	static long findOccurancesCount(String pattern, String text) {
+		int count = 0;
+		long patternHash = findHash(pattern);
+		int length = pattern.length();
+		long prevWindowHash = findHash(text.substring(0,length));
+		if(prevWindowHash == patternHash) {
+			count++;
+		}
+		for(int i=1; i<= text.length()-length; i++) {		
+			long currWindowHash1 = ((prevWindowHash*primes[0])%lp + ((text.charAt(i+length-1)*primes[0]) - (((text.charAt(i-1)*primes[length-1])%lp)*primes[0])%lp + lp*122)%lp)%lp;
+			
+			long currWindowHash2 = ((prevWindowHash*primes[0])%lp + ((text.charAt(i+length-1)*primes[0]) - (((text.charAt(i-1)*primes[length-1])%lp)*primes[0])%lp + lp*122)%lp)%lp;
+			
+			if(currWindowHash == patternHash) {
+				count++;
+			}
+
+			prevWindowHash = currWindowHash;
+		}
+		return count;
+	}
+	
+	static long findHash(String str) {
+		long hash = 0;
+		int length = str.length();
+		for (int i = 0; i < str.length(); i++) {
+			long currentHash = (str.charAt(i) * primes[length - (i+1)])%lp;
+			hash = (hash + currentHash)%lp;
+		}
+		return hash;
+	}
+	
+	static void preComputePrimes(int length,long sp) {
+		primes = new long[length];
+		primes[0] = sp;
+		for (int i = 1; i < length; i++) {
+			primes[i] = (primes[i-1]*sp)%lp;
+		}
+	}
+	
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCount = Integer.parseInt(br.readLine());
+		while(testCount > 0) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			String pattern = st.nextToken();
+			preComputePrimes(pattern.length(),sp);
+			String text = st.nextToken();
+			long count = findOccurancesCount(pattern, text);
+			System.out.println(count);
+			testCount--;
+		}
+		bw.flush();
+	}
+
+}

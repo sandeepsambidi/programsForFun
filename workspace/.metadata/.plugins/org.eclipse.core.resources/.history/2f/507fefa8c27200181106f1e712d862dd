@@ -1,0 +1,23 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class DecodeStringDP {
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCaseCount = Integer.parseInt(br.readLine());
+
+		while (testCaseCount > 0) {
+			int strLen = Integer.parseInt(br.readLine());
+			String str = br.readLine();
+			//output.write(ans + "\n");
+			testCaseCount--;
+		}
+		output.flush();
+	}
+}

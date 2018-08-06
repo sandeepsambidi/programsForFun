@@ -1,0 +1,37 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+
+public class PalindromicConcatination {
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCount = Integer.parseInt(br.readLine());
+		while(testCount > 0) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			char[] str1 = st.nextToken().toCharArray();
+			char[] str2 = st.nextToken().toCharArray();
+			HashMap<Character, Integer> alph = new HashMap<>();
+			for (int i = 0; i < str1.length; i++) {
+				alph.put(str1[i], 1);
+			}
+			boolean found = false;
+			for (int i = 0; i < str2.length; i++) {
+				if(alph.containsKey(str2[i])) {
+					found = true;
+					break;
+				}
+			}
+			
+			bw.write(found ? "Yes":"No");
+			bw.newLine();
+			testCount--;
+		}
+		bw.flush();
+	}
+
+}

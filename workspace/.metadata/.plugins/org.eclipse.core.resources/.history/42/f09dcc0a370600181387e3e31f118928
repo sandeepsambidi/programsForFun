@@ -1,0 +1,31 @@
+package com.sandy.interviewBit.arrays.arrayMath;
+
+import java.util.ArrayList;
+
+public class RepeatAndMissingNumber {
+
+	public int[] repeatedNumber(final int[] A) {
+        int[] output = new int[2];
+        
+        int xorMandR = 0;
+        ArrayList<Integer> I1S = new ArrayList<Integer>();
+        ArrayList<Integer> I1U = new ArrayList<Integer>();
+        ArrayList<Integer> N1S = new ArrayList<Integer>();
+        ArrayList<Integer> N1U = new ArrayList<Integer>();
+
+        for(int i=0; i< A.length; i++) {
+        	xorMandR = xorMandR^A[i]^(i+1);
+        }
+        
+        
+    }
+	
+	int findSetBitNumber(int num) {
+		int res = (num & (num-1));
+		return res;
+	}
+	public static void main(String[] args) {
+		
+	}
+
+}

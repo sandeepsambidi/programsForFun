@@ -1,0 +1,14 @@
+package si;
+
+public class KMP {
+
+	static void buildFailureFunciton(String pattern) {
+		int[] ps = new int[pattern.length()];
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

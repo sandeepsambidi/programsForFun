@@ -1,0 +1,46 @@
+package si;
+
+import java.util.Arrays;
+
+public class KMP {
+
+	static void buildFailureFunciton(String pattern) {
+		int[] ps = new int[pattern.length()];
+		int patIndex = 0;
+		ps[patIndex++] = 0;
+		while(patIndex < pattern.length()) {
+			int p = ps[patIndex-1];
+			if(p==0) {
+				if(pattern.charAt(patIndex) == pattern.charAt(p)) {
+					ps[patIndex] = 1;
+				}
+			} else {
+				if(pattern.charAt(patIndex) == pattern.charAt(p)) {
+					ps[patIndex] = p+1;
+				} else {
+					while(true) {
+						if(p==0) {
+							ps[patIndex] = 0;
+							break;
+						}
+						if(pattern.charAt(p) == pattern.charAt(patIndex)) {
+							p = p+1;
+							ps[patIndex] = p;
+							break;
+						} else {
+							p = ps[p-1];
+						}
+					}
+				}
+			}
+			patIndex++;
+		}
+		System.out.println(Arrays.toString(ps));
+	}
+	
+	public static void main(String[] args) {
+
+		buildFailureFunciton("AAACAAAAAC");
+	}
+
+}

@@ -1,0 +1,45 @@
+package si;
+
+public class LargestPalindrome {
+
+	static long p = 37;
+	static long lp = 1000000007;
+	static long[] primes;
+	
+	static long[] calculateForwardHash(String str) {
+		long forwardHash[] = new long[str.length()];
+		forwardHash[0] = str.charAt(0);
+		for (int i = 1; i < str.length(); i++) {
+			forwardHash[i] = (forwardHash[i-1] + (str.charAt(i)*primes[i])%lp)%lp;
+		}
+		return forwardHash;
+	}
+	
+	static long[] calculateReverseHash(String str) {
+		long reverseHash[] = new long[str.length()];
+		reverseHash[str.length()-1] = str.charAt(0);
+		for (int i = str.length()-1; i >= 0; i--) {
+			reverseHash[i] = (reverseHash[i-1] + (str.charAt(i)*primes[i])%lp)%lp;
+		}
+		return reverseHash;
+	}
+	
+	static long[] calculateReverseHase(String str) {
+		
+	}
+	
+	static long[] preCompute(int length) {
+		long[] primes = new long[length];
+		primes[0] = 1;
+		for (int i = 1; i < length; i++) {
+			primes[i] = (primes[i-1] * p)%lp;
+		}
+		return primes;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

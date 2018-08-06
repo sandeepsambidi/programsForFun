@@ -1,0 +1,113 @@
+package si;
+
+import java.util.Arrays;
+
+public class LargestPalindrome {
+
+	static long p = 2;
+	static long lp = 1000000007;
+	static long[] primes;
+	static long forwardHash[];
+	static long reverseHash[];
+	
+	static int lengthOfLongestPrime(String text) {
+		System.out.println("String = "+text);
+		int maxLength = Integer.MIN_VALUE;
+		int length = text.length();
+		preComputePrimes(length);
+		forwardHash = calculateForwardHash(text);
+		reverseHash = calculateReverseHash(text);
+		if(forwardHash[0] == reverseHash[length-1] && reverseHash[0] == forwardHash[length-1]) {
+			return length;
+		}
+		System.out.println(isMatchForLength(2, text));
+		int left = 0;
+		int right = length-1; 
+//		while(left < right) {
+//			int mid = left + ((right-left)/2);
+//			//long fhash = forwardHash[left] - reverseHash[]
+//		}
+		return 1;
+		
+		
+	}
+	
+	static boolean isMatchForLength(int windowSize, String text) {
+		long fHash = forwardHash[windowSize-1];
+		long rHash = reverseHash[0] - reverseHash[windowSize];
+		if(fHash == rHash) {
+			return true;
+		}
+		for (int i = 0; i <= text.length()-windowSize; i++) {
+			int fStart = i;
+			int rEnd = (text.length()-i -1);
+			int multiplicantPrimeIndex;
+			
+			if(fStart >= rEnd) {
+				multiplicantPrimeIndex = fStart - (rEnd - windowSize +1);
+			} else {
+				multiplicantPrimeIndex = (rEnd - windowSize +1) -fStart; 
+			}
+			
+			if(i == 0) {
+				fHash = forwardHash[i + windowSize -1];
+			} else {
+				fHash = forwardHash[i + windowSize -1] - forwardHash[i-1];
+				
+			}
+			if(i == text.length()-windowSize) {
+				rHash = reverseHash[i];
+			} else {
+				rHash = reverseHash[i] - reverseHash[i+windowSize];
+			}
+			
+			if(rEnd> fStart) {
+				fHash = (fHash*primes[multiplicantPrimeIndex])%lp;
+			}
+			if(fStart >= rEnd) {
+				rHash  = (rHash*primes[multiplicantPrimeIndex])%lp;
+			}
+			
+			if(fHash == rHash) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	static long[] calculateForwardHash(String str) {
+		long forwardHash[] = new long[str.length()];
+		forwardHash[0] = str.charAt(0);
+		for (int i = 1; i < str.length(); i++) {
+			forwardHash[i] = (forwardHash[i-1] + (str.charAt(i)*primes[i])%lp)%lp;
+		}
+		System.out.println("forward hash = "+Arrays.toString(forwardHash));
+		return forwardHash;
+	}
+	
+	static long[] calculateReverseHash(String str) {
+		long reverseHash[] = new long[str.length()];
+		reverseHash[str.length()-1] = str.charAt(str.length()-1);
+		for (int i = str.length()-2; i >= 0; i--) {
+			reverseHash[i] = (reverseHash[i+1] + (str.charAt(i)*primes[str.length()-i -1])%lp)%lp;
+		}
+		System.out.println("reverse hash = "+Arrays.toString(reverseHash));
+		return reverseHash;
+	}
+
+	
+	static void preComputePrimes(int length) {
+		primes = new long[length];
+		primes[0] = 1;
+		for (int i = 1; i < length; i++) {
+			primes[i] = (primes[i-1] * p)%lp;
+		}
+		System.out.println("primes = "+Arrays.toString(primes));
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(lengthOfLongestPrime("madam"));
+
+	}
+
+}

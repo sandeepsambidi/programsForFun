@@ -1,0 +1,5 @@
+
+public class B{
+	int b;
+	//public B(int x):b(x){}
+};

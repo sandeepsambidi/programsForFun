@@ -1,0 +1,116 @@
+package com.sandy.interviewBit.arrays;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class NumbersLengthNValueLessK {
+	
+	public int solve(int[] A, int B, int C) {
+		int[] pos = new int[10];
+		for(int i = 0; i<pos.length; i++) {
+			pos[i] = -1;
+		}
+		
+		HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
+		for(int i=0; i< A.length; i++) {
+			hm.put(A[i], 0);
+		}
+		
+		ArrayList<Integer> al = new ArrayList<Integer>();
+		
+		String Cstr = Integer.toString(C);
+		int len = Cstr.length();
+		int digit[] = new int[len];
+		for(int i=0; i<len; i++) {
+			digit[i] = Integer.parseInt(String.valueOf(Cstr.charAt(i)));
+		}
+		System.out.println("digit = "+Arrays.toString(digit));
+		HashMap<Integer, Integer> available = new HashMap<Integer, Integer>();
+		
+		for(int i = 0; i<A.length; i++) {
+			pos[A[i]] = i;
+			available.put(A[i], 0);
+		}
+		
+		for(int i = 1; i<pos.length; i++) {
+			if(pos[i] == -1) {
+				int k = pos[i-1];
+				while(i<pos.length && pos[i]==-1) {
+					pos[i] = k+1;
+					i++;
+				}
+			}
+		}
+		
+		boolean zeroAvailable = pos[0]==-1?false:true;
+		pos[0] = 0;
+		System.out.println("pos = "+Arrays.toString(pos));
+		
+		if(B > digit.length || B==0) {
+			return 0;
+		} else if(B< digit.length) {
+			if(B==1) {
+				return A.length;
+			} else {
+				if(A[0]==0) {
+					return (int) ((A.length-1)*Math.pow(A.length, digit.length-1));
+				}
+			}
+		}
+		
+		
+		int dp[] = new int[len];
+		
+		for(int i = 1; i< dp.length; i++) {
+			dp[i] += dp[i-1]*A.length;
+			if(i==1 && B!=1) {
+				if(zeroAvailable) {
+					dp[i] += pos[digit[i-1]]-1;
+				} else {
+					dp[i] += pos[digit[i-1]];
+				}
+			} else {
+				int j=0;
+				boolean all = true;
+				while(j<=i) {
+					if(!hm.containsKey(digit[j])) {
+						all = false;
+						break;
+					}
+					j++;
+				}if(all) {
+					dp[i] += pos[digit[i-1]];
+				}
+				
+			}
+			
+		}
+		
+		return dp[B];
+    }
+	
+	int firstI(int i, int[] digit) {
+		int res = 0;
+		for(int k = 0; k<i; k++) {
+			res = res*10 + digit[k];
+		}
+		return res;
+	}
+	
+
+
+	public static void main(String[] args) {
+		NumbersLengthNValueLessK obj = new NumbersLengthNValueLessK();
+//		System.out.println(obj.solve(new int[]{2, 3, 5, 6, 7, 9}, 5, 42950));
+//		System.out.println(obj.solve(new int[]{0, 1, 5}, 1, 2));
+		System.out.println(obj.solve(new int[]{0, 1,2, 5}, 2, 21)); //5
+//		System.out.println(obj.solve(new int[]{0, 1,2, 5}, 2, 8)); //3
+//		System.out.println(obj.solve(new int[]{0, 1,2, 5}, 1, 123)); //4
+//		//{2, 9}, 5, 17015 Ans: 0
+//		System.out.println(obj.solve(new int[]{2, 9}, 5, 17015));
+
+
+
+	}
+}

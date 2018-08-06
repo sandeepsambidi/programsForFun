@@ -1,0 +1,32 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class CollectingMangos {
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCount = Integer.parseInt(br.readLine());
+		while(testCount > 0) {
+			int operationCount = Integer.parseInt(br.readLine());
+			while(operationCount > 0) {
+				String op = br.readLine();
+				if(op.contains("A")) {
+					
+				} else if(op.equals("Q")) {
+					
+				} else { //equals "R"
+					
+				}
+			}
+			testCount--;
+		}
+		bw.flush();
+	}
+
+}

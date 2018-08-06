@@ -1,0 +1,82 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class RabinKarp {
+	
+	static long lp = 1000000007;
+	static long sp = 100007;
+	static long[] primes;
+
+	static long findOccurancesCount(String pattern, String text) {
+		int count = 0;
+		long patternHash = findHash(pattern);
+		int length = pattern.length();
+		long prevWindowHash = findHash(text.substring(0,length));
+		if(prevWindowHash == patternHash) {
+			count++;
+		}
+		for(int i=1; i<= text.length()-length; i++) {		
+			long additive = 122*lp;
+			System.out.println("additive = "+additive);
+			//long hvb1 = (hvb1*p[0]%mod + (p[0]*pat.charAt((int) trv-1)%mod - ((pat.charAt((int) (trv+l-1))%mod * p[l-1]%mod*p[0]%mod )%mod) +122*mod)%mod);
+			long currWindowHash = (prevWindowHash*primes[0])%lp + ((text.charAt(i+length-1)*primes[0]) - (((text.charAt(i-1)*primes[length-1])%lp)*primes[0])%lp + (122*lp))%lp;
+			String currentWin = text.substring(i,i+length);
+			System.out.println("current win string = "+currentWin+ "  : hash = "+currWindowHash);
+			
+			if(currWindowHash == patternHash) {
+				count++;
+			}
+			System.out.println("previous hash = "+prevWindowHash);
+			System.out.println("current hash = "+currWindowHash);
+
+			prevWindowHash = currWindowHash;
+		}
+		return count;
+	}
+	
+	static long findHash(String str) {
+		System.out.println("find hash for: "+str);
+		long hash = 0;
+		int length = str.length();
+		for (int i = 0; i < str.length(); i++) {
+			long currentHash = (str.charAt(i) * primes[length - (i+1)])%lp;
+			hash = hash + currentHash;
+		}
+		System.out.println("hash: "+hash);
+		return hash;
+	}
+	
+	static void preComputePrimes(int length) {
+		primes = new long[length];
+		primes[0] = sp;
+		for (int i = 1; i < length; i++) {
+			primes[i] = (primes[i-1]*sp)%lp;
+		}
+		System.out.println("primes = "+Arrays.toString(primes));
+	}
+	
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCount = Integer.parseInt(br.readLine());
+		System.out.println("long prime = "+lp);
+		System.out.println("long prime = "+sp);
+		while(testCount > 0) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			String pattern = st.nextToken();
+			preComputePrimes(pattern.length());
+			String text = st.nextToken();
+			long count = findOccurancesCount(pattern, text);
+			System.out.println(count);
+			testCount--;
+		}
+		bw.flush();
+	}
+
+}

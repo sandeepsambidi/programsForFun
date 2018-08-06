@@ -1,0 +1,71 @@
+package trees;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class CountBSTs {
+	
+	int count = 0;
+	
+	class MinMax {
+		int min;
+		int max;
+	}
+	
+	boolean countBST(int[] arr, int currIndex, MinMax range) {	
+		
+		if(currIndex >= arr.length) {
+			range.min = Integer.MAX_VALUE;
+			range.max = Integer.MIN_VALUE;
+			return true;
+		}
+		
+		int leftNodeIndex = currIndex*2;
+		int rightNodeIndex = leftNodeIndex+1;
+		
+		if(leftNodeIndex >= arr.length && rightNodeIndex >= arr.length) {
+			range.max = arr[currIndex];
+			range.min = arr[currIndex];
+			return true;
+		}
+		
+		MinMax rl = new MinMax();
+		MinMax rr = new MinMax();
+		boolean isLeftBST = countBST(arr, leftNodeIndex, rl);
+		boolean isRightBST = countBST(arr, rightNodeIndex, rr);
+		
+		if()
+		
+		
+	}
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int tc = Integer.parseInt(br.readLine());
+		while(tc>0) {
+			int nodeCount = Integer.parseInt(br.readLine());
+			int index = 1;
+			int[] arr = new int[nodeCount+1];
+
+			StringTokenizer st = new StringTokenizer(br.readLine());
+
+			while(index <= nodeCount) {
+				arr[index] = Integer.parseInt(st.nextToken());
+				index++;
+			}
+			
+			//System.out.println("pre = "+Arrays.toString(arr));
+			
+			CountBSTs obj = new CountBSTs();
+			obj.countBST(arr,1, Integer.MIN_VALUE, Integer.MAX_VALUE);
+			bw.write(obj.count + "\n");
+			obj.count = 0;
+			tc--;
+		}
+		bw.flush();
+	}
+}

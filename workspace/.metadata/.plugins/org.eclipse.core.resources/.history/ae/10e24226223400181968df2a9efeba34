@@ -1,0 +1,33 @@
+
+public class Cleaner implements Runnable{
+
+	Dustbin dustbin;
+	void Cleaner(Dustbin dustbin) {
+		this.dustbin = dustbin;
+	}
+	@Override
+	public void run() {
+		synchronized (dustbin) {
+			int i = 0;
+			while (true) {
+				if (dustbin.isEmpty() == true) {
+					try {
+						wait();
+						System.out.println("cleaner: "+Thread.currentThread().getName() + " : waiting to clean");
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				} else {
+					String item = dustbin.bin.remove(dustbin.bin.size()-1);
+					System.out.println("cleaner: "+Thread.currentThread().getName() + " : removed item: "+item);
+					notifyAll();
+
+				}
+				i++;
+			}
+			
+		}
+		
+	}
+
+}

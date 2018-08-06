@@ -1,0 +1,47 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+
+public class LongestSubArrayWithSumZero {
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int testCount = Integer.parseInt(br.readLine());
+		while(testCount > 0) {
+			int arrSize = Integer.parseInt(br.readLine());
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int index = 0;
+			HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
+			int sum = 0;
+			int res = 0;
+			while(index < arrSize) {
+				int currElement = Integer.parseInt(st.nextToken())
+				sum = sum + currElement;
+				int localRes;
+				if(res == 0 && currElement == 0) {
+					localRes = 1;
+				}
+				if(sum == 0) {
+					localRes = index + 1;
+				}
+				if(hm.containsKey(sum)) {
+					localRes = Math.max(localRes, index - hm.get(sum));
+					if(localRes > res) {
+						res = localRes;
+					}
+				}
+				else {
+					hm.put(sum, index);
+				}
+				index++;
+			}
+			System.out.println(res);
+			testCount--;
+		}
+
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;graph.RottingOrranges&apos; to &apos;RottingOranges&apos;&#x0A;- Original project: &apos;PP&apos;&#x0A;- Original element: &apos;graph.RottingOrranges&apos;&#x0A;- Renamed element: &apos;graph.RottingOranges&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;RottingOrranges&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;graph{RottingOrranges.java[RottingOrranges" matchStrategy="1" name="RottingOranges" qualified="false" references="true" similarDeclarations="false" stamp="1516978251963" textual="false" version="1.0"/>
+</session>

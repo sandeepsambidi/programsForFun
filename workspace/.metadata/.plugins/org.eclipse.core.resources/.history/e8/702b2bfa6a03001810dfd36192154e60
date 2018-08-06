@@ -1,0 +1,37 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+import graph.RottingOranges;
+
+public class MatrixFlips {
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int tc = Integer.parseInt(br.readLine());
+		int testCount = 1;
+		
+		while (testCount <= tc) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int rowCount = Integer.parseInt(st.nextToken());
+			int colCount = Integer.parseInt(st.nextToken());
+			int arr[][] = new int[rowCount][colCount];
+			int rowIndex = 0;
+			int colIndex = 0;
+			while (rowIndex < rowCount) {
+				char[] curArr = br.readLine().toString().toCharArray();
+				colIndex = 0;
+				while (colIndex < colCount) {
+					arr[rowIndex][colIndex] = Integer.parseInt(String.valueOf(curArr[colIndex]));
+					colIndex++;
+				}
+				rowIndex++;
+			}
+			RottingOranges.arr = arr;
+			countDays();
+			testCount++;
+		}
+		
+	}
+
+}

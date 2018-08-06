@@ -1,0 +1,20 @@
+
+public class User implements Runnable{
+
+	Dustbin dustbin;
+	void User(Dustbin dustbin) {
+		this.dustbin = dustbin;
+	}
+	@Override
+	public void run() {
+		synchronized (dustbin) {
+			while (true) {
+				dustbin.put(Thread.currentThread().getName()+ ": d1");
+			}
+			
+		}
+		
+	}
+	
+
+}

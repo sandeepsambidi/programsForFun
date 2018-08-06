@@ -1,0 +1,15 @@
+package twoPointer;
+
+import java.util.ArrayList;
+
+public class MinimizeAbsDifference {
+
+	int findAbsDiff(ArrayList<Integer> a,ArrayList<Integer> b, ArrayList<Integer> c ) {
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

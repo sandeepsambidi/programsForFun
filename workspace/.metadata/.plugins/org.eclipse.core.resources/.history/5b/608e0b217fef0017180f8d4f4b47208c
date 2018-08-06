@@ -1,0 +1,37 @@
+import java.util.HashMap;
+
+public class A {
+	
+	static String whichSweetShouldIBring(String[] votes) {
+        HashMap<String, Integer> sweetCount = new HashMap<String,Integer>();
+        int maxCount = 0;
+        String maxCountSweet = "";
+        for(int i=0; i< votes.length; i++) {
+            if(sweetCount.containsKey(votes[i])) {
+                sweetCount.put(votes[i], sweetCount.get(votes[i])+1);
+                if(maxCount < sweetCount.get(votes[i])) {
+                	maxCount = sweetCount.get(votes[i]);
+                	maxCountSweet = votes[i];
+                }
+                else if(maxCount == sweetCount.get(votes[i])) {
+                	if(votes[i].compareTo(maxCountSweet) <= 0) {
+                		maxCount = sweetCount.get(votes[i]);
+                    	maxCountSweet = votes[i];
+                	}
+                }
+            } else {
+            	sweetCount.put(votes[i], 1);
+            	if(maxCount < 1) {
+                	maxCount = 1;
+                	maxCountSweet = votes[i];
+                }
+            }
+        }
+        
+        return maxCountSweet;
+    }
+
+	public static void main(String[] args) {
+		System.out.println((-7+2)/2);
+	}
+}

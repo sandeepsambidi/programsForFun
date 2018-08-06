@@ -1,0 +1,29 @@
+
+public class User implements Runnable{
+
+	Dustbin dustbin;
+	void User(Dustbin dustbin) {
+		this.dustbin = dustbin;
+	}
+	@Override
+	public void run() {
+		synchronized (dustbin) {
+			int i = 0;
+			while (true) {
+				if (dustbin.isFull() == true) {
+					try {
+						wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				dustbin.put(Thread.currentThread().getName()+ ": d"+i);
+				i++;
+			}
+			
+		}
+		
+	}
+	
+
+}

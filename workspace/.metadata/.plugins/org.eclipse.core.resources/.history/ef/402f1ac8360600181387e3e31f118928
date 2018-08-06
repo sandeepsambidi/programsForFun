@@ -1,0 +1,12 @@
+package com.sandy.interviewBit.arrays.arrayMath;
+
+public class RepeatAndMissingNumber {
+
+	void findRepeatAndMissingNumber() {
+		
+	}
+	public static void main(String[] args) {
+
+	}
+
+}

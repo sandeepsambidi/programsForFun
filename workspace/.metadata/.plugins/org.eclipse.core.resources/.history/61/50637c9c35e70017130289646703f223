@@ -1,0 +1,15 @@
+package si;
+
+public class LargestPalindrome {
+
+	long p = 37;
+	static long[] forwardPrime(int length) {
+		long[] primes = new long[length];
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

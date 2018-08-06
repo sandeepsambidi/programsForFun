@@ -1,0 +1,53 @@
+package si;
+
+public class Stack {
+	
+	int stack[] = new int[10000];
+	int size = 0;
+	int top = -1;
+	
+	boolean push(int item) {
+		if(isFull()) {
+			return false;
+		} else {
+			top = top+1;
+			stack[top] = item;
+			size++;
+			return true;
+		}
+	}
+	
+	int pop() {
+		if(isEmpty()) {
+			return -101;
+		} else {
+			int topItem = stack[top];
+			top--;
+			size--;
+			return topItem;
+		}
+		
+	}
+	
+	boolean isFull() {
+		if(size == stack.length) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	boolean isEmpty() {
+		if(size == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

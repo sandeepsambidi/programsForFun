@@ -1,0 +1,11 @@
+
+public class MCH {
+
+	public static void main(String[] args) {
+		Dustbin dBin = new Dustbin();
+		
+		User satya = new User();
+		User sandeep = new User();
+	}
+
+}

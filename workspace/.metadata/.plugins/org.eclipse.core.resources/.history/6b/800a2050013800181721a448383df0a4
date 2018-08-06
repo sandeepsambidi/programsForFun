@@ -1,0 +1,68 @@
+package twoPointer;
+
+import java.util.ArrayList;
+
+public class MinimizeAbsDifference {
+
+	static int findAbsDiff(ArrayList<Integer> a,ArrayList<Integer> b, ArrayList<Integer> c ) {
+		int ia = 0;
+		int ib = 0;
+		int ic = 0;
+		int res = Integer.MAX_VALUE;
+		
+		while (ia < a.size() && ib < b.size() && ic < c.size()) {
+			if (a.get(ia) < b.get(ib)) {
+				if (a.get(ia) < c.get(ic)) {
+					return ia;
+				} else {
+					return ic;
+				}
+			} else {
+				if (b.get(ib) < c.get(ic)) {
+					return ib;
+				} else {
+					return ic;
+				}
+			}
+			
+		}
+	}
+	
+	static int findMin(ArrayList<Integer> a,ArrayList<Integer> b, ArrayList<Integer> c , int k, int q, int j) {
+		if (a.get(k) < b.get(q)) {
+			if (a.get(k) < c.get(j)) {
+				return k;
+			} else {
+				return j;
+			}
+		} else {
+			if (b.get(q) < c.get(j)) {
+				return q;
+			} else {
+				return j;
+			}
+		}
+	}
+	
+	static int findMax(ArrayList<Integer> a,ArrayList<Integer> b, ArrayList<Integer> c , int k, int q, int j) {
+		if (a.get(k) > b.get(q)) {
+			if (a.get(k) > c.get(j)) {
+				return k;
+			} else {
+				return j;
+			}
+		} else {
+			if (b.get(q) > c.get(j)) {
+				return q;
+			} else {
+				return j;
+			}
+		}
+	} 
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

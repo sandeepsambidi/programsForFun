@@ -1,0 +1,66 @@
+package com.sandy.interviewBit.arrays.arrayMath;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class RepeatAndMissingNumber {
+
+	public int[] repeatedNumber(final int[] A) {
+        int[] output = new int[2];
+        
+        int xorMandR = 0;
+        
+        int xorSetNums = 0;
+        int xorUnsetNums = 0;
+
+        for(int i=0; i< A.length; i++) {
+        	xorMandR = xorMandR^A[i]^(i+1);
+        }
+        int setBitNum = findSetBitNumber(xorMandR);
+        
+        for(int i = 0; i < A.length; i++) {
+        	if(findSetBitNumber(i+1) == setBitNum) {
+        		xorSetNums = xorSetNums ^ (i+1);
+        	} else {
+        		xorUnsetNums = xorUnsetNums ^ (i+1);
+        	}
+        	if(findSetBitNumber(A[i]) == setBitNum) {
+        		xorSetNums = xorSetNums ^ (A[i]);
+
+        	} else {
+        		xorUnsetNums = xorUnsetNums ^ (i+1);
+        	}
+        }
+        
+        boolean repeatingFound = false;
+
+        for(int i = 0; i < A.length; i++) {
+        	if(xorSetNums == A[i]) {
+        		repeatingFound = true;
+        		break;
+        	}
+        }
+        
+        if(repeatingFound) {
+        	output[0] = xorSetNums;
+        	output[1] = xorUnsetNums;
+        } else {
+        	output[0] = xorUnsetNums;
+        	output[1] = xorSetNums;
+        }
+        
+        return output;
+        
+    }
+	
+	public int findSetBitNumber(int num) {
+		int res = (num & (num-1));
+		return res;
+	}
+	public static void main(String[] args) {
+		RepeatAndMissingNumber obj = new RepeatAndMissingNumber();
+		int[] A = {3,1,2,5,3};
+		System.out.println(Arrays.toString(obj.repeatedNumber(A)));
+	}
+
+}

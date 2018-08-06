@@ -1,0 +1,39 @@
+package si;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class RangeSumSubArrays {
+
+	static int count(int[] arr, int left, int right) {
+		
+	}
+	
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCaseCount = Integer.parseInt(br.readLine());
+		while (testCaseCount > 0) {
+			StringTokenizer st1 = new StringTokenizer(br.readLine());
+			int arraySize = Integer.parseInt(st1.nextToken());
+			int left = Integer.parseInt(st1.nextToken());
+			int right = Integer.parseInt(st1.nextToken());
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int arr[] = new int[arraySize];
+			int index = 0;
+			while (st.hasMoreElements()) {
+				arr[index] = Integer.parseInt(st.nextToken());
+				index++;
+			}
+			//System.out.println(Arrays.toString(arr));
+			int result = count(arr,left, right);
+			output.write(result + "\n");
+			testCaseCount--;
+		}
+		output.flush();
+	}
+
+}
